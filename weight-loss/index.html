@@ -4,64 +4,73 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Navy Body Fat Calculator | Metric Physique Hub</title>
-    <link rel="stylesheet" href="../../assets/css/style.css">
-    <link rel="stylesheet" href="../../assets/css/calculator.css">
+    <title>Weight Loss Hub | Metric Physique Hub</title>
+    <link rel="stylesheet" href="../assets/css/style.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet">
 </head>
 
 <body>
 
     <header>
-        <div class="logo"><a href="../../index.html"><img src="../../assets/images/logo.png" alt="Logo"></a></div>
+        <div class="logo">
+            <a href="../../index.html"><img src="../../assets/images/logo.png" alt="Metric Physique Hub Logo"></a>
+        </div>
         <nav class="nav-container">
             <ul class="nav-links">
-                <li><a href="../../bodybuilding/index.html">Bodybuilding</a></li>
-                <li><a href="../../muscle-building/index.html">Muscle</a></li>
-                <li><a href="../index.html" style="color: var(--gold-primary);">Weight Loss</a></li>
-                <li><a href="../../health/index.html">Health</a></li>
-                <li><a href="../../endurance/index.html">Endurance</a></li>
+                <li><a href="../bodybuilding/index.html">Bodybuilding</a></li>
+                <li><a href="../muscle-building/index.html">Muscle</a></li>
+                <li><a href="index.html" style="color: var(--gold-primary);">Weight Loss</a></li>
+                <li><a href="../health/index.html">Health</a></li>
+                <li><a href="../endurance/index.html">Endurance</a></li>
             </ul>
         </nav>
+        <div class="special-links">
+            <a href="#" class="btn-gold-outline">Coaching</a>
+            <a href="#" class="btn-gold-outline">Elite Track</a>
+        </div>
     </header>
 
     <main>
         <section class="hero">
-            <h1>Navy Body Fat Method</h1>
-            <p>The standard US Navy circumference method for estimating body fat percentage.</p>
+            <h1>Weight Loss Hub</h1>
+            <p>Data-driven tools to optimize fat loss and track body composition.</p>
         </section>
 
-        <div class="calc-container">
-            <div class="input-grid">
-                <div class="input-group">
-                    <label>Gender</label>
-                    <select id="gender"
-                        onchange="document.getElementById('hip-row').style.display = (this.value === 'female') ? 'block' : 'none'">
-                        <option value="male">Male</option>
-                        <option value="female">Female</option>
-                    </select>
-                </div>
-                <div class="input-group"><label>Height (Inches)</label><input type="number" id="height"></div>
-                <div class="input-group"><label>Waist (Inches)</label><input type="number" id="waist"></div>
-                <div class="input-group"><label>Neck (Inches)</label><input type="number" id="neck"></div>
-                <div class="input-group" id="hip-row" style="display:none;"><label>Hips (Inches)</label><input
-                        type="number" id="hips"></div>
-            </div>
-
-            <button class="calc-btn" onclick="Formulas.bodyFatNavy()">Calculate Body Fat</button>
-
-            <div id="results-section" class="results-container">
-                <div class="res-card"><span>Est. Body Fat</span><strong id="res-bodyfat"></strong></div>
-                <div class="res-card"><span>Category</span><strong id="res-status"></strong></div>
-                <div class="export-wrap"><button class="export-btn" onclick="submitToDatabase()">Sync to Sheets</button>
-                    <p id="status-msg" class="status-msg"></p>
-                </div>
-            </div>
-        </div>
+        <section class="hub-grid">
+            <a href="body-fat-navy/index.html" class="hub-card">
+                <h3>Navy Body Fat</h3>
+                <p>US Navy circumference-based body fat estimation.</p>
+            </a>
+            <a href="bmi/index.html" class="hub-card">
+                <h3>BMI Calculator</h3>
+                <p>Standard Body Mass Index calculation.</p>
+            </a>
+            <a href="waist-height/index.html" class="hub-card">
+                <h3>Waist-to-Height</h3>
+                <p>A superior metric for metabolic health tracking.</p>
+            </a>
+            <a href="calorie-deficit/index.html" class="hub-card">
+                <h3>Calorie Deficit</h3>
+                <p>Identify your target intake for sustainable loss.</p>
+            </a>
+            <a href="loss-timeline/index.html" class="hub-card">
+                <h3>Loss Timeline</h3>
+                <p>Estimate the weeks required to hit your goal.</p>
+            </a>
+        </section>
     </main>
 
-    <script src="../../assets/js/core.js"></script>
-    <script src="../../assets/js/formulas.js"></script>
+    <footer>
+        <div class="social-links">
+            <a href="#">FB</a> <a href="#">IG</a> <a href="#">X</a> <a href="#">TK</a>
+        </div>
+        <div class="footer-legal">
+            <p><a href="../privacy-policy/index.html">Privacy Policy</a> | <a
+                    href="../disclosure/index.html">Disclosure</a></p>
+            <p style="margin-top: 10px;">Metric Physique Hub © 2026</p>
+        </div>
+    </footer>
+
 </body>
 
 </html>
