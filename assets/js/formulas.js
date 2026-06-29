@@ -387,4 +387,68 @@ const Formulas = {
         this.displayResults(results, "BMI Analysis", { weight: w, height: h });
     },
 
+    // 15. Waist-to-Height Ratio
+    waistToHeight: function () {
+        const w = parseFloat(document.getElementById('waist').value);
+        const h = parseFloat(document.getElementById('height').value);
+
+        if (!w || !h) return alert("Please enter both measurements.");
+
+        const ratio = (w / h).toFixed(2);
+        let status = "Healthy";
+        if (ratio > 0.53) status = "High Risk";
+        else if (ratio > 0.49) status = "Increased Risk";
+        else if (ratio < 0.42) status = "Extremely Lean";
+
+        const results = {
+            ratio: ratio,
+            status: status,
+            idealWaist: (h * 0.45).toFixed(1) + " in"
+        };
+
+        this.displayResults(results, "Waist-to-Height Analysis", { waist: w, height: h });
+    },
+
+    // 16. Calorie Deficit Calculator
+    calorieDeficit: function () {
+        const tdee = parseFloat(document.getElementById('tdee-input').value);
+        const intensity = document.getElementById('loss-rate').value; // '0.5', '1.0', '2.0'
+
+        if (!tdee) return alert("Please enter your TDEE.");
+
+        const dailyDeficit = parseFloat(intensity) * 500; // 500 kcal per lb
+        const targetIntake = (tdee - dailyDeficit).toFixed(0);
+
+        const results = {
+            maintenance: tdee + " kcal",
+            targetIntake: targetIntake + " kcal",
+            dailyDeficit: dailyDeficit + " kcal",
+            weeklyLoss: intensity + " lbs"
+        };
+
+        this.displayResults(results, "Calorie Deficit Plan", { tdee: tdee, intensity: intensity });
+    },
+
+    // 17. Weight Loss Timeline
+    lossTimeline: function () {
+        const current = parseFloat(document.getElementById('weight-now').value);
+        const goal = parseFloat(document.getElementById('weight-goal').value);
+        const deficit = parseFloat(document.getElementById('daily-deficit').value);
+
+        if (!current || !goal || !deficit) return alert("Please fill in all fields.");
+
+        const totalToLose = current - goal;
+        const totalCalories = totalToLose * 3500;
+        const totalDays = (totalCalories / deficit).toFixed(0);
+        const weeks = (totalDays / 7).toFixed(1);
+
+        const results = {
+            totalToLose: totalToLose + " lbs",
+            days: totalDays + " Days",
+            weeks: weeks + " Weeks"
+        };
+
+        this.displayResults(results, "Loss Timeline Estimate", { current, goal, deficit });
+    },
+
 };

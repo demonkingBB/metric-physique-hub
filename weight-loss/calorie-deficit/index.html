@@ -4,20 +4,20 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Navy Body Fat Calculator | Metric Physique Hub</title>
+    <title>Calorie Deficit Calculator | Metric Physique Hub</title>
     <link rel="stylesheet" href="../../assets/css/style.css">
     <link rel="stylesheet" href="../../assets/css/calculator.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet">
 </head>
 
 <body>
-
     <header>
         <div class="logo"><a href="../../index.html"><img src="../../assets/images/logo.png" alt="Logo"></a></div>
         <nav class="nav-container">
             <ul class="nav-links">
                 <li><a href="../../bodybuilding/index.html">Bodybuilding</a></li>
                 <li><a href="../../muscle-building/index.html">Muscle</a></li>
-                <li><a href="../index.html" style="color: var(--gold-primary);">Weight Loss</a></li>
+                <li><a href="../index.html" style="color:var(--gold-primary)">Weight Loss</a></li>
                 <li><a href="../../health/index.html">Health</a></li>
                 <li><a href="../../endurance/index.html">Endurance</a></li>
             </ul>
@@ -30,39 +30,34 @@
 
     <main>
         <section class="hero">
-            <h1>Navy Body Fat Method</h1>
-            <p>The standard US Navy circumference method for estimating body fat percentage.</p>
+            <h1>Calorie Deficit Plan</h1>
+            <p>Define your daily intake based on your loss goals.</p>
         </section>
-
         <div class="calc-container">
             <div class="input-grid">
+                <div class="input-group"><label>Your TDEE (kcal)</label><input type="number" id="tdee-input"></div>
                 <div class="input-group">
-                    <label>Gender</label>
-                    <select id="gender"
-                        onchange="document.getElementById('hip-row').style.display = (this.value === 'female') ? 'block' : 'none'">
-                        <option value="male">Male</option>
-                        <option value="female">Female</option>
+                    <label>Target Loss per Week</label>
+                    <select id="loss-rate" class="custom-select"
+                        style="background:#000; color:white; padding:12px; border:1px solid #262626;">
+                        <option value="0.5">0.5 lbs (Lean)</option>
+                        <option value="1.0" selected>1.0 lbs (Moderate)</option>
+                        <option value="2.0">2.0 lbs (Aggressive)</option>
                     </select>
                 </div>
-                <div class="input-group"><label>Height (Inches)</label><input type="number" id="height"></div>
-                <div class="input-group"><label>Waist (Inches)</label><input type="number" id="waist"></div>
-                <div class="input-group"><label>Neck (Inches)</label><input type="number" id="neck"></div>
-                <div class="input-group" id="hip-row" style="display:none;"><label>Hips (Inches)</label><input
-                        type="number" id="hips"></div>
             </div>
-
-            <button class="calc-btn" onclick="Formulas.bodyFatNavy()">Calculate Body Fat</button>
-
+            <button class="calc-btn" onclick="Formulas.calorieDeficit()">Calculate Deficit</button>
             <div id="results-section" class="results-container">
-                <div class="res-card"><span>Est. Body Fat</span><strong id="res-bodyfat"></strong></div>
-                <div class="res-card"><span>Category</span><strong id="res-status"></strong></div>
+                <div class="results-grid">
+                    <div class="res-card"><span>Daily Target</span><strong id="res-targetIntake"></strong></div>
+                    <div class="res-card"><span>Weekly Loss</span><strong id="res-weeklyLoss"></strong></div>
+                    <div class="res-card"><span>Daily Deficit</span><strong id="res-dailyDeficit"></strong></div>
+                </div>
                 <div class="export-wrap"><button class="export-btn" onclick="submitToDatabase()">Sync to Sheets</button>
-                    <p id="status-msg" class="status-msg"></p>
                 </div>
             </div>
         </div>
     </main>
-
     <script src="../../assets/js/core.js"></script>
     <script src="../../assets/js/formulas.js"></script>
 </body>

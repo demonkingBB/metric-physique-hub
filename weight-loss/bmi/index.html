@@ -4,9 +4,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Navy Body Fat Calculator | Metric Physique Hub</title>
+    <title>BMI Calculator | Metric Physique Hub</title>
     <link rel="stylesheet" href="../../assets/css/style.css">
     <link rel="stylesheet" href="../../assets/css/calculator.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet">
+
 </head>
 
 <body>
@@ -17,7 +19,7 @@
             <ul class="nav-links">
                 <li><a href="../../bodybuilding/index.html">Bodybuilding</a></li>
                 <li><a href="../../muscle-building/index.html">Muscle</a></li>
-                <li><a href="../index.html" style="color: var(--gold-primary);">Weight Loss</a></li>
+                <li><a href="../index.html" style="color:var(--gold-primary)">Weight Loss</a></li>
                 <li><a href="../../health/index.html">Health</a></li>
                 <li><a href="../../endurance/index.html">Endurance</a></li>
             </ul>
@@ -30,33 +32,25 @@
 
     <main>
         <section class="hero">
-            <h1>Navy Body Fat Method</h1>
-            <p>The standard US Navy circumference method for estimating body fat percentage.</p>
+            <h1>BMI Calculator</h1>
+            <p>Standard Body Mass Index measurement for weight classification.</p>
         </section>
 
         <div class="calc-container">
             <div class="input-grid">
-                <div class="input-group">
-                    <label>Gender</label>
-                    <select id="gender"
-                        onchange="document.getElementById('hip-row').style.display = (this.value === 'female') ? 'block' : 'none'">
-                        <option value="male">Male</option>
-                        <option value="female">Female</option>
-                    </select>
-                </div>
+                <div class="input-group"><label>Weight (lbs)</label><input type="number" id="weight"></div>
                 <div class="input-group"><label>Height (Inches)</label><input type="number" id="height"></div>
-                <div class="input-group"><label>Waist (Inches)</label><input type="number" id="waist"></div>
-                <div class="input-group"><label>Neck (Inches)</label><input type="number" id="neck"></div>
-                <div class="input-group" id="hip-row" style="display:none;"><label>Hips (Inches)</label><input
-                        type="number" id="hips"></div>
             </div>
 
-            <button class="calc-btn" onclick="Formulas.bodyFatNavy()">Calculate Body Fat</button>
+            <button class="calc-btn" onclick="Formulas.bmi()">Calculate BMI</button>
 
             <div id="results-section" class="results-container">
-                <div class="res-card"><span>Est. Body Fat</span><strong id="res-bodyfat"></strong></div>
-                <div class="res-card"><span>Category</span><strong id="res-status"></strong></div>
-                <div class="export-wrap"><button class="export-btn" onclick="submitToDatabase()">Sync to Sheets</button>
+                <div class="results-grid">
+                    <div class="res-card"><span>BMI Score</span><strong id="res-bmi"></strong></div>
+                    <div class="res-card"><span>Category</span><strong id="res-category"></strong></div>
+                </div>
+                <div class="export-wrap">
+                    <button class="export-btn" onclick="submitToDatabase()">Sync to Sheets</button>
                     <p id="status-msg" class="status-msg"></p>
                 </div>
             </div>
