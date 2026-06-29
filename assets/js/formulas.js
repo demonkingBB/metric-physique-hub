@@ -250,5 +250,63 @@ const Formulas = {
         };
 
         this.displayResults(results, "Calorie Surplus Bulk", { weight, goal });
+    },
+    // 9. BMR & TDEE (Combined)
+    bmrTdee: function () {
+        const w = parseFloat(document.getElementById('weight').value);
+        const h = parseFloat(document.getElementById('height').value);
+        const a = parseFloat(document.getElementById('age').value);
+        const g = document.getElementById('gender').value;
+        const act = parseFloat(document.getElementById('activity').value);
+
+        if (!w || !h || !a) return alert("Please fill in all fields.");
+
+        // Mifflin-St Jeor Equation
+        let bmr = (10 * (w * 0.453592)) + (6.25 * (h * 2.54)) - (5 * a);
+        bmr = (g === 'male') ? bmr + 5 : bmr - 161;
+
+        const tdee = (bmr * act).toFixed(0);
+
+        const results = {
+            bmr: bmr.toFixed(0) + " kcal",
+            tdee: tdee + " kcal"
+        };
+
+        this.displayResults(results, "BMR-TDEE Analysis", { weight: w, activity: act });
+    },
+
+    // 10. 1-Rep Max (Epley Formula)
+    oneRepMax: function () {
+        const weight = parseFloat(document.getElementById('lift-weight').value);
+        const reps = parseFloat(document.getElementById('lift-reps').value);
+
+        if (!weight || !reps) return alert("Please enter weight and reps.");
+
+        // Epley Formula
+        const m = (weight * (1 + (reps / 30))).toFixed(1);
+
+        const results = {
+            max: m + " lbs",
+            ninety: (m * 0.9).toFixed(1) + " lbs",
+            eighty: (m * 0.8).toFixed(1) + " lbs",
+            seventy: (m * 0.7).toFixed(1) + " lbs"
+        };
+
+        this.displayResults(results, "1-Rep Max Estimate", { weight, reps });
+    },
+
+    // 11. Macro Calculator (Muscle Gain Focus)
+    macroCalc: function () {
+        const tdeeInput = parseFloat(document.getElementById('target-calories').value);
+        if (!tdeeInput) return alert("Please enter your target calories.");
+
+        // Standard 40/30/30 Distribution for Growth
+        const results = {
+            protein: ((tdeeInput * 0.30) / 4).toFixed(0) + "g",
+            carbs: ((tdeeInput * 0.40) / 4).toFixed(0) + "g",
+            fats: ((tdeeInput * 0.30) / 9).toFixed(0) + "g"
+        };
+
+        this.displayResults(results, "Macro Distribution", { target_kcal: tdeeInput });
     }
 };
