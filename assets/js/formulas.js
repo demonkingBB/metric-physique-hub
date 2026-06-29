@@ -568,4 +568,97 @@ const Formulas = {
         this.displayResults(results, "VO2 Max Estimate", { distance: dist, unit: unit });
     },
 
+    // 23. Pace Calculator
+    paceCalc: function () {
+        const dist = parseFloat(document.getElementById('pace-dist').value);
+        const hours = parseFloat(document.getElementById('pace-hr').value) || 0;
+        const mins = parseFloat(document.getElementById('pace-min').value) || 0;
+        const secs = parseFloat(document.getElementById('pace-sec').value) || 0;
+
+        if (!dist || (hours === 0 && mins === 0 && secs === 0)) return alert("Please enter distance and time.");
+
+        const totalSeconds = (hours * 3600) + (mins * 60) + secs;
+        const secondsPerMile = totalSeconds / dist;
+
+        const pMins = Math.floor(secondsPerMile / 60);
+        const pSecs = Math.round(secondsPerMile % 60);
+
+        const results = {
+            pace: pMins + ":" + (pSecs < 10 ? '0' : '') + pSecs + " /mi",
+            totalTime: hours + "h " + mins + "m " + secs + "s",
+            speed: (dist / (totalSeconds / 3600)).toFixed(2) + " mph"
+        };
+
+        this.displayResults(results, "Pace Calculation", { distance: dist, time_sec: totalSeconds });
+    },
+
+    // 24. Sweat Rate Calculator
+    sweatRate: function () {
+        const pre = parseFloat(document.getElementById('pre-weight').value);
+        const post = parseFloat(document.getElementById('post-weight').value);
+        const fluid = parseFloat(document.getElementById('fluid-oz').value) || 0;
+        const time = parseFloat(document.getElementById('exercise-hr').value);
+
+        if (!pre || !post || !time) return alert("Please fill in weight and time.");
+
+        // Weight loss in oz (1lb = 16oz)
+        const weightLossOz = (pre - post) * 16;
+        const totalLoss = weightLossOz + fluid;
+        const ratePerHour = (totalLoss / time).toFixed(1);
+
+        const results = {
+            hourlyRate: ratePerHour + " oz/hr",
+            totalLoss: totalLoss.toFixed(1) + " oz",
+            liters: (ratePerHour * 0.0295735).toFixed(2) + " L/hr"
+        };
+
+        this.displayResults(results, "Sweat Rate Analysis", { pre_weight: pre, post_weight: post, time_hr: time });
+    },
+
+    // 25. Carb Requirement (Intra-workout)
+    carbCalc: function () {
+        const duration = parseFloat(document.getElementById('event-duration').value);
+
+        if (!duration) return alert("Please enter event duration.");
+
+        let hourlyCarbs = "0-30g";
+        let type = "Mouth Rinse / Small Snacks";
+
+        if (duration >= 2.5) {
+            hourlyCarbs = "60-90g";
+            type = "Multiple Transportable Carbohydrates (Glucose/Fructose)";
+        } else if (duration >= 1) {
+            hourlyCarbs = "30-60g";
+            type = "Mixed Carbohydrates (Gels/Drinks)";
+        }
+
+        const results = {
+            carbTarget: hourlyCarbs + " per hour",
+            fuelType: type,
+            totalEvent: (duration * parseInt(hourlyCarbs.split('-')[1])).toFixed(0) + "g (Max)"
+        };
+
+        this.displayResults(results, "Intra-workout Carb Plan", { duration_hr: duration });
+    },
+
+    // 26. Calories Burned (MET Method)
+    caloriesBurned: function () {
+        const weight = parseFloat(document.getElementById('cal-weight').value);
+        const time = parseFloat(document.getElementById('cal-time').value);
+        const met = parseFloat(document.getElementById('activity-met').value);
+
+        if (!weight || !time) return alert("Please fill in weight and duration.");
+
+        // Formula: Calories = MET * Weight(kg) * Time(hrs)
+        const kg = weight * 0.453592;
+        const burned = (met * kg * (time / 60)).toFixed(0);
+
+        const results = {
+            totalBurned: burned + " kcal",
+            hourlyRate: (burned / (time / 60)).toFixed(0) + " kcal/hr"
+        };
+
+        this.displayResults(results, "Energy Expenditure", { weight, duration: time, met_value: met });
+    }
+
 };

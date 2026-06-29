@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sweat Rate Calculator | Metric Physique Hub</title>
+    <link rel="stylesheet" href="../../assets/css/style.css">
+    <link rel="stylesheet" href="../../assets/css/calculator.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet">
+</head>
+
+<body>
+    <header>
+        <div class="logo"><a href="../../index.html"><img src="../../assets/images/logo.png" alt="Logo"></a></div>
+        <nav class="nav-container">
+            <ul class="nav-links">
+                <li><a href="../../bodybuilding/index.html">Bodybuilding</a></li>
+                <li><a href="../../muscle-building/index.html">Muscle</a></li>
+                <li><a href="../../weight-loss/index.html">Weight Loss</a></li>
+                <li><a href="../../health/index.html">Health</a></li>
+                <li><a href="../index.html" style="color:var(--gold-primary)">Endurance</a></li>
+            </ul>
+        </nav>
+        <div class="special-links"><a href="#" class="btn-gold-outline">Coaching</a><a href="#"
+                class="btn-gold-outline">Elite Track</a></div>
+    </header>
+
+    <main>
+        <section class="hero">
+            <h1>Sweat Rate Calculator</h1>
+            <p>Measure your fluid loss during exercise to create a precise hydration plan.</p>
+        </section>
+        <div class="calc-container">
+            <div class="input-grid">
+                <div class="input-group"><label>Weight Before (lbs)</label><input type="number" id="pre-weight"
+                        step="0.1"></div>
+                <div class="input-group"><label>Weight After (lbs)</label><input type="number" id="post-weight"
+                        step="0.1"></div>
+                <div class="input-group"><label>Fluid Consumed (oz)</label><input type="number" id="fluid-oz"
+                        placeholder="0"></div>
+                <div class="input-group"><label>Workout Time (Hours)</label><input type="number" id="exercise-hr"
+                        step="0.1"></div>
+            </div>
+            <button class="calc-btn" onclick="Formulas.sweatRate()">Calculate Rate</button>
+            <div id="results-section" class="results-container">
+                <div class="res-card" style="margin-bottom:1.5rem; border-bottom: 3px solid var(--gold-primary);">
+                    <span>Hourly Sweat Rate</span><strong id="res-hourlyRate" style="font-size:2.5rem;"></strong>
+                </div>
+                <div class="results-grid">
+                    <div class="res-card"><span>Total Loss (oz)</span><strong id="res-totalLoss"></strong></div>
+                    <div class="res-card"><span>Hourly (Liters)</span><strong id="res-liters"></strong></div>
+                </div>
+                <div class="export-wrap"><button class="export-btn" onclick="submitToDatabase()">Sync to Sheets</button>
+                </div>
+            </div>
+        </div>
+    </main>
+    <script src="../../assets/js/core.js"></script>
+    <script src="../../assets/js/formulas.js"></script>
+</body>
+
+</html>
