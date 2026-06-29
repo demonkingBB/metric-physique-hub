@@ -336,4 +336,55 @@ const Formulas = {
 
         this.displayResults(results, "Protein Needs Analysis", { weight, bodyfat: bf });
     },
+
+    // 13. Navy Body Fat Method
+    bodyFatNavy: function () {
+        const g = document.getElementById('gender').value;
+        const h = parseFloat(document.getElementById('height').value);
+        const w = parseFloat(document.getElementById('waist').value);
+        const n = parseFloat(document.getElementById('neck').value);
+        const hip = parseFloat(document.getElementById('hips').value) || 0;
+
+        if (!h || !w || !n) return alert("Please fill in all required fields.");
+
+        let bf = 0;
+        if (g === 'male') {
+            // Navy Formula (Male): 86.010*log10(waist-neck) - 70.041*log10(height) + 36.76
+            bf = 86.010 * Math.log10(w - n) - 70.041 * Math.log10(h) + 36.76;
+        } else {
+            // Navy Formula (Female): 163.205*log10(waist+hips-neck) - 97.684*log10(height) - 78.387
+            if (!hip) return alert("Hips measurement is required for females.");
+            bf = 163.205 * Math.log10(w + hip - n) - 97.684 * Math.log10(h) - 78.387;
+        }
+
+        const results = {
+            bodyfat: bf.toFixed(1) + "%",
+            leanMass: "Calculated", // Optional: could add weight to calc actual lbs
+            status: bf < 15 ? "Lean" : (bf < 25 ? "Fit" : "Average")
+        };
+
+        this.displayResults(results, "Navy Body Fat Analysis", { height: h, waist: w, gender: g });
+    },
+
+    // 14. BMI Calculator
+    bmi: function () {
+        const w = parseFloat(document.getElementById('weight').value);
+        const h = parseFloat(document.getElementById('height').value);
+        if (!w || !h) return alert("Please fill in Weight and Height.");
+
+        const bmiVal = (703 * w / (h * h)).toFixed(1);
+
+        let cat = "Normal";
+        if (bmiVal >= 30) cat = "Obese";
+        else if (bmiVal >= 25) cat = "Overweight";
+        else if (bmiVal < 18.5) cat = "Underweight";
+
+        const results = {
+            bmi: bmiVal,
+            category: cat
+        };
+
+        this.displayResults(results, "BMI Analysis", { weight: w, height: h });
+    },
+
 };
