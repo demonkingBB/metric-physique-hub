@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Steve Reeves Formula | Metric Physique Hub</title>
+    <link rel="stylesheet" href="/assets/css/style.css">
+    <link rel="stylesheet" href="/assets/css/calculator.css">
+</head>
+
+<body>
+
+    <header>
+        <div class="logo"><a href="/"><img src="/assets/images/logo.png" alt="Logo"></a></div>
+        <nav class="nav-container">
+            <ul class="nav-links">
+                <li><a href="/bodybuilding/" style="color:var(--gold-primary)">Bodybuilding</a></li>
+                <li><a href="/muscle-building/">Muscle</a></li>
+                <li><a href="/weight-loss/">Weight Loss</a></li>
+                <li><a href="/health/">Health</a></li>
+                <li><a href="/endurance/">Endurance</a></li>
+            </ul>
+        </nav>
+        <div class="special-links">
+            <a href="#" class="btn-gold-outline">Coaching</a>
+            <a href="#" class="btn-gold-outline">Elite Track</a>
+        </div>
+    </header>
+
+    <main>
+        <section class="hero">
+            <h1>Steve Reeves Formula</h1>
+            <p>Calculated genetic potential based on classic bone structure ratios.</p>
+        </section>
+
+        <div class="calc-container">
+            <div class="input-grid">
+                <div class="input-group">
+                    <label>Wrist Circumference (Inches)</label>
+                    <input type="number" id="wrist" step="0.1" placeholder="e.g. 7.0">
+                </div>
+                <div class="input-group">
+                    <label>Ankle Circumference (Inches)</label>
+                    <input type="number" id="ankle" step="0.1" placeholder="e.g. 8.5">
+                </div>
+            </div>
+
+            <button class="calc-btn" onclick="Formulas.reeves()">Calculate Proportions</button>
+
+            <div id="results-section" class="results-container">
+                <h2>Ideal Measurements</h2>
+                <div class="results-grid">
+                    <div class="res-card"><span>Arm</span><strong id="res-arm"></strong></div>
+                    <div class="res-card"><span>Calf</span><strong id="res-calf"></strong></div>
+                    <div class="res-card"><span>Neck</span><strong id="res-neck"></strong></div>
+                    <div class="res-card"><span>Chest</span><strong id="res-chest"></strong></div>
+                    <div class="res-card"><span>Waist</span><strong id="res-waist"></strong></div>
+                    <div class="res-card"><span>Thigh</span><strong id="res-thigh"></strong></div>
+                </div>
+
+                <div class="export-wrap">
+                    <p style="margin-bottom: 15px;">Calculation complete. Sync your data now.</p>
+                    <button class="export-btn" onclick="submitToDatabase()">Export to Google Sheets (CSV)</button>
+                    <p id="status-msg" class="status-msg"></p>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <div class="social-links">
+            <a href="#">FB</a> <a href="#">IG</a> <a href="#">X</a> <a href="#">TK</a>
+        </div>
+        <div class="footer-legal">
+            <p><a href="/privacy-policy/">Privacy Policy</a> | <a href="/disclosure/">Disclosure</a></p>
+            <p style="margin-top: 10px;">Metric Physique Hub © 2026</p>
+        </div>
+    </footer>
+
+    <script src="/assets/js/core.js"></script>
+    <script src="/assets/js/formulas.js"></script>
+</body>
+
+</html>

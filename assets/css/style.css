@@ -1,0 +1,179 @@
+/* --- METRIC PHYSIQUE HUB: RESPONSIVE GLOBAL THEME --- */
+:root {
+    --bg-black: #050505;
+    --surface-gray: #121212;
+    --gold-primary: #D4AF37;
+    --gold-hover: #F1D592;
+    --text-main: #ffffff;
+    --text-muted: #a0a0a0;
+    --border-color: #262626;
+    --font-main: 'Inter', sans-serif;
+    --nav-height: 80px;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: var(--bg-black);
+    color: var(--text-main);
+    font-family: var(--font-main);
+    line-height: 1.6;
+}
+
+/* --- RESPONSIVE HEADER --- */
+header {
+    display: flex;
+    flex-wrap: wrap;
+    /* Allows items to drop to next line if no space */
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 5%;
+    background: rgba(5, 5, 5, 0.98);
+    border-bottom: 1px solid var(--border-color);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
+.logo img {
+    height: 50px;
+    width: auto;
+}
+
+/* Navigation Menu */
+.nav-container {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.nav-links {
+    display: flex;
+    gap: 1.5rem;
+    list-style: none;
+}
+
+.nav-links a {
+    text-decoration: none;
+    color: var(--text-main);
+    font-size: 0.9rem;
+    font-weight: 500;
+    transition: color 0.3s;
+}
+
+.special-links {
+    display: flex;
+    gap: 10px;
+}
+
+/* --- MOBILE HEADER ADJUSTMENTS (The "Underneath" Logic) --- */
+@media (max-width: 992px) {
+    header {
+        flex-direction: column;
+        /* Stacks Logo, then Nav, then Gold Buttons */
+        gap: 1rem;
+        padding: 1rem;
+    }
+
+    .nav-links {
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 1rem;
+    }
+
+    .nav-links a {
+        font-size: 0.8rem;
+    }
+}
+
+/* --- GOLD BUTTONS --- */
+.btn-gold-outline {
+    border: 2px solid var(--gold-primary);
+    color: var(--gold-primary);
+    padding: 0.6rem 1rem;
+    text-decoration: none;
+    border-radius: 4px;
+    font-weight: bold;
+    text-transform: uppercase;
+    font-size: 0.75rem;
+    white-space: nowrap;
+    /* Prevents button text from breaking */
+    transition: all 0.3s;
+}
+
+.btn-gold-outline:hover {
+    background: var(--gold-primary);
+    color: var(--bg-black);
+}
+
+/* --- HERO SECTION --- */
+.hero {
+    text-align: center;
+    padding: 4rem 1.5rem;
+    background: radial-gradient(circle at center, #1a1a1a 0%, #050505 100%);
+}
+
+.hero h1 {
+    font-size: clamp(2rem, 8vw, 3.5rem);
+    /* Fluid typography */
+    margin-bottom: 1rem;
+}
+
+/* --- RESPONSIVE HUB GRID --- */
+.hub-grid {
+    display: grid;
+    /* This creates as many columns as fit, but never smaller than 280px */
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1.5rem;
+    padding: 2rem 5%;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.hub-card {
+    background: var(--surface-gray);
+    border: 1px solid var(--border-color);
+    padding: 2.5rem 1.5rem;
+    text-align: center;
+    border-radius: 12px;
+    text-decoration: none;
+    color: white;
+    transition: transform 0.3s, border-color 0.3s;
+}
+
+.hub-card:hover {
+    border-color: var(--gold-primary);
+    transform: translateY(-5px);
+}
+
+/* --- FOOTER RESPONSIVENESS --- */
+footer {
+    padding: 3rem 5%;
+    background: var(--surface-gray);
+    border-top: 1px solid var(--border-color);
+    text-align: center;
+}
+
+.social-links {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 2rem;
+    margin-bottom: 2rem;
+}
+
+.social-links a {
+    color: var(--text-muted);
+    font-size: 1.5rem;
+}
+
+@media (max-width: 480px) {
+    .hub-grid {
+        grid-template-columns: 1fr;
+        /* Force single column on very small phones */
+    }
+}

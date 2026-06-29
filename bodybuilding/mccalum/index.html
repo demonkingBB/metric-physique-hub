@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>McCallum Formula Calculator | Metric Physique Hub</title>
+    <meta name="description"
+        content="Calculate your classic physical proportions using the McCallum Formula, based on John McCallum's 'Keys to Progress'.">
+
+    <!-- Reusing Global Styles -->
+    <link rel="stylesheet" href="/assets/css/style.css">
+    <link rel="stylesheet" href="/assets/css/calculator.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet">
+</head>
+
+<body>
+
+    <header>
+        <div class="logo"><a href="/"><img src="/logo.png" alt="Logo"></a></div>
+        <nav class="nav-container">
+            <ul class="nav-links">
+                <li><a href="/bodybuilding/" style="color:var(--gold-primary)">Bodybuilding</a></li>
+                <li><a href="/muscle-building/">Muscle</a></li>
+                <li><a href="/weight-loss/">Weight Loss</a></li>
+                <li><a href="/health/">Health</a></li>
+                <li><a href="/endurance/">Endurance</a></li>
+            </ul>
+        </nav>
+        <div class="special-links">
+            <a href="#" class="btn-gold-outline">Coaching</a>
+            <a href="#" class="btn-gold-outline">Elite Track</a>
+        </div>
+    </header>
+
+    <main>
+        <section class="hero">
+            <h1>McCallum Formula</h1>
+            <p>The "Complete Physique" proportions based on John McCallum's classic ratios.</p>
+        </section>
+
+        <div class="calc-container">
+            <div class="input-grid">
+                <div class="input-group" style="grid-column: 1 / -1;">
+                    <label>Current Chest Measurement (Inches)</label>
+                    <input type="number" id="chest-input" step="0.1" placeholder="e.g. 42.0">
+                    <small style="color: var(--text-muted); margin-top: 5px;">This formula uses your chest as the
+                        baseline for all other muscle groups.</small>
+                </div>
+            </div>
+
+            <button class="calc-btn" onclick="Formulas.mccallum()">Calculate Proportions</button>
+
+            <div id="results-section" class="results-container">
+                <h2>McCallum Proportions</h2>
+                <div class="results-grid">
+                    <div class="res-card"><span>Neck</span><strong id="res-neck"></strong></div>
+                    <div class="res-card"><span>Arm</span><strong id="res-arm"></strong></div>
+                    <div class="res-card"><span>Forearm</span><strong id="res-forearm"></strong></div>
+                    <div class="res-card"><span>Waist</span><strong id="res-waist"></strong></div>
+                    <div class="res-card"><span>Thigh</span><strong id="res-thigh"></strong></div>
+                    <div class="res-card"><span>Calf</span><strong id="res-calf"></strong></div>
+                </div>
+
+                <!-- Method A Export (Method B remains hidden in core.js) -->
+                <div class="export-wrap">
+                    <p style="margin-bottom: 15px;">Target proportions generated. Sync to your records.</p>
+                    <button class="export-btn" onclick="submitToDatabase()">Export to Google Sheets (CSV)</button>
+                    <p id="status-msg" class="status-msg"></p>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <div class="social-links">
+            <a href="#">FB</a> <a href="#">IG</a> <a href="#">X</a> <a href="#">TK</a>
+        </div>
+        <div class="footer-legal">
+            <p><a href="/privacy-policy/">Privacy Policy</a> | <a href="/disclosure/">Disclosure</a></p>
+            <p>Metric Physique Hub © 2026</p>
+        </div>
+    </footer>
+
+    <!-- Global Scripts -->
+    <script src="/assets/js/core.js"></script>
+    <script src="/assets/js/formulas.js"></script>
+</body>
+
+</html>
