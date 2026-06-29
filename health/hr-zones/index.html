@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HR Zones Calculator | Metric Physique Hub</title>
+    <link rel="stylesheet" href="../../assets/css/style.css">
+    <link rel="stylesheet" href="../../assets/css/calculator.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet">
+</head>
+
+<body>
+    <header>
+        <div class="logo"><a href="../../index.html"><img src="../../assets/images/logo.png" alt="Logo"></a></div>
+        <nav class="nav-container">
+            <ul class="nav-links">
+                <li><a href="../../bodybuilding/index.html">Bodybuilding</a></li>
+                <li><a href="../../muscle-building/index.html">Muscle</a></li>
+                <li><a href="../../weight-loss/index.html">Weight Loss</a></li>
+                <li><a href="../index.html" style="color:var(--gold-primary)">Health</a></li>
+                <li><a href="../../endurance/index.html">Endurance</a></li>
+            </ul>
+        </nav>
+        <div class="special-links"><a href="#" class="btn-gold-outline">Coaching</a><a href="#"
+                class="btn-gold-outline">Elite Track</a></div>
+    </header>
+
+    <main>
+        <section class="hero">
+            <h1>Heart Rate Zones</h1>
+            <p>Target intensities based on the Karvonen Formula.</p>
+        </section>
+        <div class="calc-container">
+            <div class="input-grid">
+                <div class="input-group"><label>Age</label><input type="number" id="age"></div>
+                <div class="input-group"><label>Resting HR</label><input type="number" id="rhr" placeholder="e.g. 60">
+                </div>
+            </div>
+            <button class="calc-btn" onclick="Formulas.hrZones()">Calculate Zones</button>
+            <div id="results-section" class="results-container">
+                <div class="res-card" style="margin-bottom:1rem;"><span>Max Heart Rate</span><strong
+                        id="res-maxHR"></strong></div>
+                <div class="results-grid">
+                    <div class="res-card"><span>Zone 1 (Recovery)</span><strong id="res-zone1"></strong></div>
+                    <div class="res-card"><span>Zone 2 (Aerobic)</span><strong id="res-zone2"></strong></div>
+                    <div class="res-card"><span>Zone 3 (Tempo)</span><strong id="res-zone3"></strong></div>
+                    <div class="res-card"><span>Zone 4 (Threshold)</span><strong id="res-zone4"></strong></div>
+                    <div class="res-card"><span>Zone 5 (Anaerobic)</span><strong id="res-zone5"></strong></div>
+                </div>
+                <div class="export-wrap"><button class="export-btn" onclick="submitToDatabase()">Sync to Sheets</button>
+                </div>
+            </div>
+        </div>
+    </main>
+    <script src="../../assets/js/core.js"></script>
+    <script src="../../assets/js/formulas.js"></script>
+</body>
+
+</html>

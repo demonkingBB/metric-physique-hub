@@ -451,4 +451,121 @@ const Formulas = {
         this.displayResults(results, "Loss Timeline Estimate", { current, goal, deficit });
     },
 
+    // 18. Blood Pressure Classification
+    bloodPressure: function () {
+        const sys = parseInt(document.getElementById('systolic').value);
+        const dia = parseInt(document.getElementById('diastolic').value);
+
+        if (!sys || !dia) return alert("Please enter both readings.");
+
+        let category = "Normal";
+        if (sys >= 180 || dia >= 120) category = "Hypertensive Crisis (Seek Help)";
+        else if (sys >= 140 || dia >= 90) category = "Hypertension Stage 2";
+        else if (sys >= 130 || dia >= 80) category = "Hypertension Stage 1";
+        else if (sys >= 120 && dia < 80) category = "Elevated";
+
+        const results = {
+            reading: sys + "/" + dia + " mmHg",
+            category: category
+        };
+
+        this.displayResults(results, "Blood Pressure Analysis", { systolic: sys, diastolic: dia });
+    },
+
+    // 19. Heart Rate Zones (Karvonen Formula)
+    hrZones: function () {
+        const age = parseInt(document.getElementById('age').value);
+        const rhr = parseInt(document.getElementById('rhr').value);
+
+        if (!age || !rhr) return alert("Please enter Age and Resting HR.");
+
+        const mhr = 220 - age;
+        const hrr = mhr - rhr;
+
+        const calcZone = (pct) => Math.round((hrr * pct) + rhr);
+
+        const results = {
+            maxHR: mhr + " bpm",
+            zone1: calcZone(0.5) + " - " + calcZone(0.6),
+            zone2: calcZone(0.6) + " - " + calcZone(0.7),
+            zone3: calcZone(0.7) + " - " + calcZone(0.8),
+            zone4: calcZone(0.8) + " - " + calcZone(0.9),
+            zone5: calcZone(0.9) + " - " + mhr
+        };
+
+        this.displayResults(results, "Heart Rate Zones", { age, restingHR: rhr });
+    },
+
+    // 20. Water Intake
+    waterIntake: function () {
+        const weight = parseFloat(document.getElementById('weight-lbs').value);
+        const exercise = parseFloat(document.getElementById('exercise-min').value) || 0;
+
+        if (!weight) return alert("Please enter your weight.");
+
+        // Base: 0.67 oz per lb + 12oz per 30 min exercise
+        const base = weight * 0.67;
+        const extra = (exercise / 30) * 12;
+        const totalOz = (base + extra).toFixed(0);
+
+        const results = {
+            dailyOunces: totalOz + " oz",
+            liters: (totalOz * 0.0295735).toFixed(2) + " L",
+            glasses: Math.round(totalOz / 8) + " glasses (8oz)"
+        };
+
+        this.displayResults(results, "Hydration Analysis", { weight, exercise_min: exercise });
+    },
+
+    // 21. Sleep Cycles (90-min)
+    sleepCalc: function () {
+        const wakeTime = document.getElementById('wake-time').value;
+        if (!wakeTime) return alert("Please select a wake-up time.");
+
+        const [hours, minutes] = wakeTime.split(':').map(Number);
+        const wakeDate = new Date();
+        wakeDate.setHours(hours, minutes, 0);
+
+        const calcBedtime = (cycles) => {
+            const d = new Date(wakeDate.getTime() - (cycles * 90 * 60000) - (15 * 60000)); // 15 mins to fall asleep
+            return d.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+        };
+
+        const results = {
+            sixCycles: calcBedtime(6) + " (Best)",
+            fiveCycles: calcBedtime(5) + " (Good)",
+            fourCycles: calcBedtime(4) + " (Minimum)"
+        };
+
+        this.displayResults(results, "Sleep Cycle Planning", { target_wake: wakeTime });
+    },
+
+    // 22. VO2 Max Estimate (Cooper Test)
+    vo2Max: function () {
+        const dist = parseFloat(document.getElementById('dist-val').value);
+        const unit = document.getElementById('dist-unit').value;
+
+        if (!dist) return alert("Please enter the distance covered.");
+
+        // Convert to meters if input is miles
+        const meters = (unit === 'miles') ? dist * 1609.34 : dist;
+
+        // Cooper Test Formula: (Distance in meters - 504.9) / 44.73
+        const vo2 = ((meters - 504.9) / 44.73).toFixed(2);
+
+        let category = "Average";
+        if (vo2 >= 52) category = "Superior";
+        else if (vo2 >= 43) category = "Excellent";
+        else if (vo2 >= 34) category = "Good";
+        else if (vo2 < 25) category = "Poor";
+
+        const results = {
+            vo2Score: vo2 + " ml/kg/min",
+            category: category,
+            totalMeters: Math.round(meters) + " m"
+        };
+
+        this.displayResults(results, "VO2 Max Estimate", { distance: dist, unit: unit });
+    },
+
 };
