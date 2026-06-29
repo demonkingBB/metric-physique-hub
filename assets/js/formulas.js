@@ -308,5 +308,32 @@ const Formulas = {
         };
 
         this.displayResults(results, "Macro Distribution", { target_kcal: tdeeInput });
-    }
+    },
+
+    // 12. Protein Needs (Hypertrophy Focused)
+    proteinNeeds: function () {
+        const weight = parseFloat(document.getElementById('prot-weight').value);
+        const bf = parseFloat(document.getElementById('prot-bf').value) || 0;
+
+        if (!weight) return alert("Please enter your weight.");
+
+        let lbm = weight;
+        if (bf > 0) {
+            lbm = weight * (1 - (bf / 100));
+        }
+
+        // Research-backed ranges (grams per day)
+        // Maintenance: 0.8g/lb of total weight
+        // Growth: 1.0g/lb of total weight OR 1.2g/lb of LBM
+        // Max Retention: 1.2g/lb of total weight (for deep cutting)
+
+        const results = {
+            maintenance: (weight * 0.8).toFixed(0) + "g",
+            muscleGrowth: (weight * 1.0).toFixed(0) + "g",
+            eliteHypertrophy: (lbm * 1.2).toFixed(0) + "g",
+            leanMass: lbm.toFixed(1) + " lbs"
+        };
+
+        this.displayResults(results, "Protein Needs Analysis", { weight, bodyfat: bf });
+    },
 };
