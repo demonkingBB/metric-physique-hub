@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Muscle Building Macro Calculator | Metric Physique Hub</title>
+    <meta name="description"
+        content="Calculate your ideal macronutrient split for muscle growth. Optimized protein, carb, and fat ratios for hypertrophy.">
+
+    <link rel="stylesheet" href="../../assets/css/style.css">
+    <link rel="stylesheet" href="../../assets/css/calculator.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet">
+</head>
+
+<body>
+
+    <header>
+        <div class="logo"><a href="../../index.html"><img src="../../assets/images/logo.png" alt="Logo"></a></div>
+        <nav class="nav-container">
+            <ul class="nav-links">
+                <li><a href="../index.html" style="color: var(--gold-primary);">Muscle Building</a></li>
+            </ul>
+        </nav>
+        <div class="special-links">
+            <a href="#" class="btn-gold-outline">Coaching</a>
+            <a href="#" class="btn-gold-outline">Elite Track</a>
+        </div>
+    </header>
+
+    <main>
+        <section class="hero">
+            <h1>Macro Calculator</h1>
+            <p>Optimize your Protein, Carb, and Fat distribution for maximum muscle retention and growth.</p>
+        </section>
+
+        <div class="calc-container">
+            <div class="input-grid">
+                <div class="input-group" style="grid-column: 1 / -1;">
+                    <label>Target Daily Calories (kcal)</label>
+                    <input type="number" id="target-calories" placeholder="e.g. 2800">
+                    <small style="color: var(--text-muted); margin-top: 5px;">Use the TDEE calculator first if you
+                        aren't sure of your target.</small>
+                </div>
+            </div>
+
+            <button class="calc-btn" onclick="Formulas.macroCalc()">Calculate Macros</button>
+
+            <div id="results-section" class="results-container">
+                <h2>Daily Macro Targets</h2>
+                <div class="results-grid">
+                    <div class="res-card">
+                        <span>Protein (30%)</span>
+                        <strong id="res-protein">--</strong>
+                    </div>
+                    <div class="res-card">
+                        <span>Carbs (40%)</span>
+                        <strong id="res-carbs">--</strong>
+                    </div>
+                    <div class="res-card">
+                        <span>Fats (30%)</span>
+                        <strong id="res-fats">--</strong>
+                    </div>
+                </div>
+
+                <div class="export-wrap">
+                    <button class="export-btn" onclick="submitToDatabase()">Sync to Google Sheets</button>
+                    <p id="status-msg" class="status-msg"></p>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <div class="social-links">
+            <a href="#">FB</a> <a href="#">IG</a> <a href="#">X</a> <a href="#">TK</a>
+        </div>
+        <div class="footer-legal">
+            <p><a href="../../privacy-policy/index.html">Privacy Policy</a> | <a
+                    href="../../disclosure/index.html">Disclosure</a></p>
+            <p>Metric Physique Hub © 2026</p>
+        </div>
+    </footer>
+
+    <script src="../../assets/js/core.js"></script>
+    <script src="../../assets/js/formulas.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>1-Rep Max Calculator | Metric Physique Hub</title>
+    <link rel="stylesheet" href="../../assets/css/style.css">
+    <link rel="stylesheet" href="../../assets/css/calculator.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet">
+</head>
+
+<body>
+
+    <header>
+        <div class="logo"><a href="../../index.html"><img src="../../logo.png" alt="Logo"></a></div>
+        <nav class="nav-container">
+            <ul class="nav-links">
+                <li><a href="../index.html" style="color: var(--gold-primary);">Muscle Building</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section class="hero">
+            <h1>1-Rep Max Estimate</h1>
+            <p>Estimate your maximum strength for any lift based on your training reps.</p>
+        </section>
+
+        <div class="calc-container">
+            <div class="input-grid">
+                <div class="input-group">
+                    <label>Weight Lifted (lbs)</label>
+                    <input type="number" id="lift-weight" placeholder="e.g. 225">
+                </div>
+                <div class="input-group">
+                    <label>Reps Performed</label>
+                    <input type="number" id="lift-reps" placeholder="e.g. 8">
+                </div>
+            </div>
+
+            <button class="calc-btn" onclick="Formulas.oneRepMax()">Estimate Max</button>
+
+            <div id="results-section" class="results-container">
+                <h2>Strength Profile</h2>
+                <div class="res-card" style="margin-bottom: 1.5rem; border-bottom: 3px solid var(--gold-primary);">
+                    <span>Estimated 1-Rep Max</span>
+                    <strong id="res-max" style="font-size: 2.5rem;">--</strong>
+                </div>
+
+                <div class="results-grid">
+                    <div class="res-card">
+                        <span>90% Max</span>
+                        <strong id="res-ninety">--</strong>
+                    </div>
+                    <div class="res-card">
+                        <span>80% Max</span>
+                        <strong id="res-eighty">--</strong>
+                    </div>
+                    <div class="res-card">
+                        <span>70% Max</span>
+                        <strong id="res-seventy">--</strong>
+                    </div>
+                </div>
+
+                <div class="export-wrap">
+                    <button class="export-btn" onclick="submitToDatabase()">Sync to Google Sheets</button>
+                    <p id="status-msg" class="status-msg"></p>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <div class="footer-legal">
+            <p><a href="../../privacy-policy/index.html">Privacy Policy</a> | Metric Physique Hub © 2026</p>
+        </div>
+    </footer>
+
+    <script src="../../assets/js/core.js"></script>
+    <script src="../../assets/js/formulas.js"></script>
+</body>
+
+</html>

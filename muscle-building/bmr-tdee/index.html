@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BMR & TDEE Calculator | Metric Physique Hub</title>
+    <link rel="stylesheet" href="../../assets/css/style.css">
+    <link rel="stylesheet" href="../../assets/css/calculator.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet">
+</head>
+
+<body>
+
+    <header>
+        <div class="logo"><a href="../../index.html"><img src="../../assets/images/logo.png" alt="Logo"></a></div>
+        <nav class="nav-container">
+            <ul class="nav-links">
+                <li><a href="../index.html" style="color: var(--gold-primary);">Muscle Building</a></li>
+            </ul>
+        </nav>
+        <div class="special-links">
+            <a href="#" class="btn-gold-outline">Coaching</a>
+            <a href="#" class="btn-gold-outline">Elite Track</a>
+        </div>
+    </header>
+
+    <main>
+        <section class="hero">
+            <h1>BMR & TDEE Analysis</h1>
+            <p>Understand your metabolic rate and daily energy requirements.</p>
+        </section>
+
+        <div class="calc-container">
+            <div class="input-grid">
+                <div class="input-group">
+                    <label>Weight (lbs)</label>
+                    <input type="number" id="weight" placeholder="e.g. 185">
+                </div>
+                <div class="input-group">
+                    <label>Height (Inches)</label>
+                    <input type="number" id="height" placeholder="e.g. 70">
+                </div>
+                <div class="input-group">
+                    <label>Age</label>
+                    <input type="number" id="age" placeholder="25">
+                </div>
+                <div class="input-group">
+                    <label>Gender</label>
+                    <select id="gender" class="custom-select">
+                        <option value="male">Male</option>
+                        <option value="female">Female</option>
+                    </select>
+                </div>
+                <div class="input-group" style="grid-column: 1 / -1;">
+                    <label>Activity Level</label>
+                    <select id="activity" class="custom-select">
+                        <option value="1.2">Sedentary (No Exercise)</option>
+                        <option value="1.375">Light (1-2 days/week)</option>
+                        <option value="1.55" selected>Moderate (3-5 days/week)</option>
+                        <option value="1.725">Heavy (6-7 days/week)</option>
+                        <option value="1.9">Athlete (2x daily training)</option>
+                    </select>
+                </div>
+            </div>
+
+            <button class="calc-btn" onclick="Formulas.bmrTdee()">Calculate Metabolism</button>
+
+            <div id="results-section" class="results-container">
+                <h2>Metabolic Breakdown</h2>
+                <div class="results-grid">
+                    <div class="res-card">
+                        <span>Total Daily (TDEE)</span>
+                        <strong id="res-tdee">--</strong>
+                    </div>
+                    <div class="res-card">
+                        <span>Basal Rate (BMR)</span>
+                        <strong id="res-bmr">--</strong>
+                    </div>
+                </div>
+
+                <div class="export-wrap">
+                    <button class="export-btn" onclick="submitToDatabase()">Sync to Google Sheets</button>
+                    <p id="status-msg" class="status-msg"></p>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script src="../../assets/js/core.js"></script>
+    <script src="../../assets/js/formulas.js"></script>
+</body>
+
+</html>
