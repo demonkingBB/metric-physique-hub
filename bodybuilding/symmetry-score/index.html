@@ -11,44 +11,58 @@
 </head>
 
 <body>
-    <header>
-        <div class="logo"><a href="../../index.html"><img src="../../assets/images/logo.png" alt="Logo"></a></div>
-        <nav class="nav-container">
-            <ul class="nav-links">
-                <li><a href="../index.html" style="color:var(--gold-primary)">Bodybuilding</a></li>
-            </ul>
-        </nav>
-    </header>
+    </head>
 
-    <main>
-        <section class="hero">
-            <h1>Symmetry Score</h1>
-            <p>Compare Left vs. Right side deviations.</p>
-        </section>
-        <div class="calc-container">
-            <div class="input-grid">
-                <div class="input-group"><label>Left Arm</label><input type="number" id="leftArm" step="0.1"></div>
-                <div class="input-group"><label>Right Arm</label><input type="number" id="rightArm" step="0.1"></div>
-                <div class="input-group"><label>Left Thigh</label><input type="number" id="leftThigh" step="0.1"></div>
-                <div class="input-group"><label>Right Thigh</label><input type="number" id="rightThigh" step="0.1">
+    <body>
+
+        <header>
+            <div class="logo"><a href="../../"><img src="../../assets/images/logo.png" alt="Logo"></a></div>
+            <nav class="nav-container">
+                <ul class="nav-links">
+                    <li><a href="../" style="color:var(--gold-primary)">Bodybuilding</a></li>
+                    <li><a href="../../muscle-building/">Muscle</a></li>
+                    <li><a href="../../weight-loss/">Weight Loss</a></li>
+                    <li><a href="../../health/">Health</a></li>
+                    <li><a href="../../endurance/">Endurance</a></li>
+                </ul>
+            </nav>
+            <div class="special-links">
+                <a href="https://demonkingbb.github.io/fitscience/" class="btn-gold-outline">Coaching</a>
+                <a href="https://fitnesstracker-kappa-plum.vercel.app/" class="btn-gold-outline">Elite Track</a>
+            </div>
+        </header>
+
+        <main>
+            <section class="hero">
+                <h1>Symmetry Score</h1>
+                <p>Compare Left vs. Right side deviations.</p>
+            </section>
+            <div class="calc-container">
+                <div class="input-grid">
+                    <div class="input-group"><label>Left Arm</label><input type="number" id="leftArm" step="0.1"></div>
+                    <div class="input-group"><label>Right Arm</label><input type="number" id="rightArm" step="0.1">
+                    </div>
+                    <div class="input-group"><label>Left Thigh</label><input type="number" id="leftThigh" step="0.1">
+                    </div>
+                    <div class="input-group"><label>Right Thigh</label><input type="number" id="rightThigh" step="0.1">
+                    </div>
+                </div>
+                <button class="calc-btn" onclick="Formulas.symmetryScore()">Calculate Symmetry</button>
+                <div id="results-section" class="results-container">
+                    <div class="res-card"><span>Overall Score</span><strong id="res-overall"></strong></div>
+                    <div class="results-grid">
+                        <div class="res-card"><span>Arm Balance</span><strong id="res-armscore"></strong></div>
+                        <div class="res-card"><span>Thigh Balance</span><strong id="res-thighscore"></strong></div>
+                    </div>
+                    <div class="export-wrap"><button class="export-btn" onclick="submitToDatabase()">Export to
+                            Sheets</button>
+                        <p id="status-msg" class="status-msg"></p>
+                    </div>
                 </div>
             </div>
-            <button class="calc-btn" onclick="Formulas.symmetryScore()">Calculate Symmetry</button>
-            <div id="results-section" class="results-container">
-                <div class="res-card"><span>Overall Score</span><strong id="res-overall"></strong></div>
-                <div class="results-grid">
-                    <div class="res-card"><span>Arm Balance</span><strong id="res-armscore"></strong></div>
-                    <div class="res-card"><span>Thigh Balance</span><strong id="res-thighscore"></strong></div>
-                </div>
-                <div class="export-wrap"><button class="export-btn" onclick="submitToDatabase()">Export to
-                        Sheets</button>
-                    <p id="status-msg" class="status-msg"></p>
-                </div>
-            </div>
-        </div>
-    </main>
-    <script src="../../assets/js/core.js"></script>
-    <script src="../../assets/js/formulas.js"></script>
-</body>
+        </main>
+        <script src="../../assets/js/core.js"></script>
+        <script src="../../assets/js/formulas.js"></script>
+    </body>
 
 </html>
