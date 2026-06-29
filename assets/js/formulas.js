@@ -97,5 +97,84 @@ const Formulas = {
             measurements: inputs,
             ideals: results
         };
-    }
+    },
+
+    // 4. Golden Ratio (Shoulder-to-Waist)
+    goldenRatio: function () {
+        const s = parseFloat(document.getElementById('shoulders').value);
+        const w = parseFloat(document.getElementById('waist').value);
+
+        if (!s || !w) {
+            alert("Please enter both shoulder and waist measurements.");
+            return;
+        }
+
+        const currentRatio = (s / w).toFixed(3);
+        const target = 1.618;
+        const idealWaist = (s / target).toFixed(1);
+        const idealShoulders = (w * target).toFixed(1);
+
+        // Determine "Symmetry Score" (How close to 1.618 they are)
+        const variance = Math.abs(currentRatio - target);
+        let score = (100 - (variance * 50)).toFixed(1);
+        if (score > 100) score = 100;
+        if (score < 0) score = 0;
+
+        const results = {
+            ratio: currentRatio,
+            score: score + "%",
+            target: target,
+            idealWaist: idealWaist,
+            idealShoulders: idealShoulders
+        };
+
+        // UI Update using our shared helper
+        this.displayResults(results, "Golden Ratio Analysis", { shoulders: s, waist: w });
+    },
+
+    // 5. FFMI (Fat-Free Mass Index)
+    ffmi: function () {
+        const lbs = parseFloat(document.getElementById('weight-lbs').value);
+        const inches = parseFloat(document.getElementById('height-in').value);
+        const bf = parseFloat(document.getElementById('body-fat').value);
+
+        if (!lbs || !inches || !bf) {
+            alert("Please fill in all fields (Weight, Height, and Body Fat %).");
+            return;
+        }
+
+        // Conversions
+        const kg = lbs * 0.453592;
+        const meters = inches * 0.0254;
+
+        // Step 1: Lean Body Mass (LBM)
+        const lbmLbs = lbs * (1 - (bf / 100));
+        const lbmKg = kg * (1 - (bf / 100));
+        const fatMass = lbs - lbmLbs;
+
+        // Step 2: Standard FFMI
+        const ffmiVal = lbmKg / (meters * meters);
+
+        // Step 3: Normalized FFMI (Adjusted for 1.8m height)
+        const normalizedFFMI = ffmiVal + (6.1 * (1.8 - meters));
+
+        // Step 4: Classification Logic
+        let category = "Average";
+        if (normalizedFFMI >= 25) category = "Elite (Natural Limit)";
+        else if (normalizedFFMI >= 22) category = "Superior";
+        else if (normalizedFFMI >= 20) category = "Excellent";
+        else if (normalizedFFMI < 18) category = "Below Average";
+
+        const results = {
+            ffmi: ffmiVal.toFixed(2),
+            normFFMI: normalizedFFMI.toFixed(2),
+            classification: category,
+            leanMass: lbmLbs.toFixed(1) + " lbs",
+            fatMass: fatMass.toFixed(1) + " lbs"
+        };
+
+        // UI Update using shared helper
+        this.displayResults(results, "FFMI Analysis", { weight: lbs, height: inches, bodyfat: bf });
+    },
+
 };

@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FFMI Calculator (Normalized) | Metric Physique Hub</title>
+    <meta name="description"
+        content="Calculate your Fat-Free Mass Index (FFMI) and Normalized FFMI to track lean muscle progress and genetic potential.">
+
+    <!-- Relative Pathing -->
+    <link rel="stylesheet" href="../../assets/css/style.css">
+    <link rel="stylesheet" href="../../assets/css/calculator.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet">
+</head>
+
+<body>
+
+    <header>
+        <div class="logo">
+            <a href="../../index.html"><img src="../../logo.png" alt="Metric Physique Hub Logo"></a>
+        </div>
+        <nav class="nav-container">
+            <ul class="nav-links">
+                <li><a href="../index.html" style="color:var(--gold-primary)">Bodybuilding</a></li>
+                <li><a href="../../muscle-building/index.html">Muscle</a></li>
+                <li><a href="../../weight-loss/index.html">Weight Loss</a></li>
+                <li><a href="../../health/index.html">Health</a></li>
+                <li><a href="../../endurance/index.html">Endurance</a></li>
+            </ul>
+        </nav>
+        <div class="special-links">
+            <a href="#" class="btn-gold-outline">Coaching</a>
+            <a href="#" class="btn-gold-outline">Elite Track</a>
+        </div>
+    </header>
+
+    <main>
+        <section class="hero">
+            <h1>FFMI Calculator</h1>
+            <p>Determine your muscle mass index and track your growth against natural benchmarks.</p>
+        </section>
+
+        <div class="calc-container">
+            <div class="input-grid">
+                <div class="input-group">
+                    <label>Weight (lbs)</label>
+                    <input type="number" id="weight-lbs" placeholder="e.g. 195">
+                </div>
+                <div class="input-group">
+                    <label>Height (Inches)</label>
+                    <input type="number" id="height-in" placeholder="e.g. 71">
+                </div>
+                <div class="input-group">
+                    <label>Body Fat %</label>
+                    <input type="number" id="body-fat" placeholder="e.g. 12">
+                </div>
+            </div>
+
+            <button class="calc-btn" onclick="Formulas.ffmi()">Calculate FFMI</button>
+
+            <div id="results-section" class="results-container">
+                <h2>Muscle Mass Analysis</h2>
+
+                <!-- Hero Result -->
+                <div class="res-card" style="margin-bottom: 1.5rem; border-bottom: 3px solid var(--gold-primary);">
+                    <span>Normalized FFMI Score</span>
+                    <strong id="res-normFFMI" style="font-size: 2.5rem;">--</strong>
+                    <span id="res-classification"
+                        style="color: var(--gold-primary); font-weight: bold; margin-top: 10px;">--</span>
+                </div>
+
+                <div class="results-grid">
+                    <div class="res-card">
+                        <span>Standard FFMI</span>
+                        <strong id="res-ffmi">--</strong>
+                    </div>
+                    <div class="res-card">
+                        <span>Lean Body Mass</span>
+                        <strong id="res-leanMass">--</strong>
+                    </div>
+                    <div class="res-card">
+                        <span>Total Fat Mass</span>
+                        <strong id="res-fatMass">--</strong>
+                    </div>
+                </div>
+
+                <div class="export-wrap">
+                    <p style="margin-bottom: 15px;">Muscularity metrics calculated. Sync to Google Sheets.</p>
+                    <button class="export-btn" onclick="submitToDatabase()">Export to Google Sheets (CSV)</button>
+                    <p id="status-msg" class="status-msg"></p>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <div class="social-links">
+            <a href="#">FB</a> <a href="#">IG</a> <a href="#">X</a> <a href="#">TK</a>
+        </div>
+        <div class="footer-legal">
+            <p><a href="../../privacy-policy/index.html">Privacy Policy</a> | <a
+                    href="../../disclosure/index.html">Disclosure</a></p>
+            <p>Metric Physique Hub © 2026</p>
+        </div>
+    </footer>
+
+    <script src="../../assets/js/core.js"></script>
+    <script src="../../assets/js/formulas.js"></script>
+</body>
+
+</html>
