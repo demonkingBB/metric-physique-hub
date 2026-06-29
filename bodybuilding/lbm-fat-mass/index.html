@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LBM & Fat Mass | Metric Physique Hub</title>
+    <link rel="stylesheet" href="../../assets/css/style.css">
+    <link rel="stylesheet" href="../../assets/css/calculator.css">
+</head>
+
+<body>
+    <header>
+        <div class="logo"><a href="../../index.html"><img src="../../logo.png" alt="Logo"></a></div>
+    </header>
+    <main>
+        <section class="hero">
+            <h1>LBM & Fat Mass</h1>
+            <p>Detailed body composition breakdown.</p>
+        </section>
+        <div class="calc-container">
+            <div class="input-grid">
+                <div class="input-group"><label>Weight (lbs)</label><input type="number" id="comp-weight"></div>
+                <div class="input-group"><label>Body Fat %</label><input type="number" id="comp-bf"></div>
+            </div>
+            <button class="calc-btn" onclick="Formulas.lbmFatMass()">Calculate Breakdown</button>
+            <div id="results-section" class="results-container">
+                <div class="results-grid">
+                    <div class="res-card"><span>Lean Mass</span><strong id="res-lbm"></strong></div>
+                    <div class="res-card"><span>Fat Mass</span><strong id="res-fatMass"></strong></div>
+                    <div class="res-card"><span>Muscle:Fat Ratio</span><strong id="res-muscleToFatRatio"></strong></div>
+                </div>
+                <div class="export-wrap"><button class="export-btn" onclick="submitToDatabase()">Export to
+                        Sheets</button>
+                    <p id="status-msg" class="status-msg"></p>
+                </div>
+            </div>
+        </div>
+    </main>
+    <script src="../../assets/js/core.js"></script>
+    <script src="../../assets/js/formulas.js"></script>
+</body>
+
+</html>

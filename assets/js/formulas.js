@@ -177,4 +177,78 @@ const Formulas = {
         this.displayResults(results, "FFMI Analysis", { weight: lbs, height: inches, bodyfat: bf });
     },
 
+    // 6. Symmetry Score (Left vs. Right Balance)
+    symmetryScore: function () {
+        const parts = ['Arm', 'Thigh', 'Calf'];
+        let totalVariance = 0;
+        const results = {};
+        const inputs = {};
+
+        parts.forEach(part => {
+            const left = parseFloat(document.getElementById('left' + part).value);
+            const right = parseFloat(document.getElementById('right' + part).value);
+            if (left && right) {
+                inputs['left' + part] = left;
+                inputs['right' + part] = right;
+                const variance = Math.abs(left - right);
+                const partScore = (100 - (variance / Math.max(left, right) * 100)).toFixed(1);
+                results[part.toLowerCase() + 'Score'] = partScore + "%";
+                totalVariance += parseFloat(partScore);
+            }
+        });
+
+        const overall = (totalVariance / parts.length).toFixed(1);
+        results['overall'] = overall + "%";
+
+        this.displayResults(results, "Symmetry Score", inputs);
+    },
+
+    // 7. LBM & Fat Mass (Advanced Composition)
+    lbmFatMass: function () {
+        const weight = parseFloat(document.getElementById('comp-weight').value);
+        const bf = parseFloat(document.getElementById('comp-bf').value);
+
+        if (!weight || !bf) return alert("Please fill in all fields.");
+
+        const fatMass = (weight * (bf / 100)).toFixed(1);
+        const lbm = (weight - fatMass).toFixed(1);
+        const ratio = (lbm / fatMass).toFixed(2);
+
+        const results = {
+            lbm: lbm + " lbs",
+            fatMass: fatMass + " lbs",
+            muscleToFatRatio: ratio + ":1"
+        };
+
+        this.displayResults(results, "LBM & Fat Mass", { weight, bodyfat: bf });
+    },
+
+    // 8. Calorie Surplus (Bulking Calculator)
+    calorieSurplus: function () {
+        const weight = parseFloat(document.getElementById('bulk-weight').value);
+        const height = parseFloat(document.getElementById('bulk-height').value);
+        const age = parseFloat(document.getElementById('bulk-age').value);
+        const gender = document.getElementById('bulk-gender').value;
+        const activity = parseFloat(document.getElementById('bulk-activity').value);
+        const goal = document.getElementById('bulk-goal').value; // 'lean' or 'aggressive'
+
+        if (!weight || !height || !age) return alert("Please fill in all fields.");
+
+        // BMR (Mifflin-St Jeor)
+        let bmr = (10 * (weight * 0.4535)) + (6.25 * (height * 2.54)) - (5 * age);
+        bmr = (gender === 'male') ? bmr + 5 : bmr - 161;
+
+        const tdee = bmr * activity;
+        const surplus = (goal === 'lean') ? 250 : 500;
+        const target = (tdee + surplus).toFixed(0);
+
+        const results = {
+            maintenance: tdee.toFixed(0),
+            surplusTarget: target,
+            protein: (weight * 1).toFixed(0) + "g",
+            fats: (weight * 0.35).toFixed(0) + "g"
+        };
+
+        this.displayResults(results, "Calorie Surplus Bulk", { weight, goal });
+    }
 };

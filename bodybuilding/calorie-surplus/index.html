@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bulking Calculator | Metric Physique Hub</title>
+    <link rel="stylesheet" href="../../assets/css/style.css">
+    <link rel="stylesheet" href="../../assets/css/calculator.css">
+</head>
+
+<body>
+    <header>
+        <div class="logo"><a href="../../index.html"><img src="../../logo.png" alt="Logo"></a></div>
+    </header>
+    <main>
+        <section class="hero">
+            <h1>Bulking Calculator</h1>
+            <p>Precise caloric needs for lean mass gain.</p>
+        </section>
+        <div class="calc-container">
+            <div class="input-grid">
+                <div class="input-group"><label>Weight (lbs)</label><input type="number" id="bulk-weight"></div>
+                <div class="input-group"><label>Height (Inches)</label><input type="number" id="bulk-height"></div>
+                <div class="input-group"><label>Age</label><input type="number" id="bulk-age"></div>
+                <div class="input-group">
+                    <label>Activity Level</label>
+                    <select id="bulk-activity"
+                        style="background:#000; color:white; padding:12px; border:1px solid #262626; border-radius:6px;">
+                        <option value="1.2">Sedentary</option>
+                        <option value="1.55" selected>Moderate Exercise</option>
+                        <option value="1.9">Heavy Athlete</option>
+                    </select>
+                </div>
+                <div class="input-group">
+                    <label>Surplus Goal</label>
+                    <select id="bulk-goal"
+                        style="background:#000; color:white; padding:12px; border:1px solid #262626; border-radius:6px;">
+                        <option value="lean">Lean Bulk (+250 kcal)</option>
+                        <option value="aggressive">Aggressive (+500 kcal)</option>
+                    </select>
+                </div>
+                <input type="hidden" id="bulk-gender" value="male">
+            </div>
+            <button class="calc-btn" onclick="Formulas.calorieSurplus()">Calculate Bulk</button>
+            <div id="results-section" class="results-container">
+                <div class="results-grid">
+                    <div class="res-card"><span>Daily Target</span><strong id="res-surplusTarget"></strong></div>
+                    <div class="res-card"><span>Maintenance</span><strong id="res-maintenance"></strong></div>
+                    <div class="res-card"><span>Protein Goal</span><strong id="res-protein"></strong></div>
+                    <div class="res-card"><span>Min. Fats</span><strong id="res-fats"></strong></div>
+                </div>
+                <div class="export-wrap"><button class="export-btn" onclick="submitToDatabase()">Export to
+                        Sheets</button>
+                    <p id="status-msg" class="status-msg"></p>
+                </div>
+            </div>
+        </div>
+    </main>
+    <script src="../../assets/js/core.js"></script>
+    <script src="../../assets/js/formulas.js"></script>
+</body>
+
+</html>
