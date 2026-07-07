@@ -20,7 +20,7 @@ const Formulas = {
             neck: (wrist * 2.48).toFixed(1),
             chest: (wrist * 6.5).toFixed(1),
             waist: (wrist * 6.5 * 0.70).toFixed(1),
-            thigh: (ankle * 1.75).toFixed(1)
+            thigh: (ankle * 2.75).toFixed(1)
         };
 
         this.displayResults(results, "Steve Reeves Formula", { wrist, ankle });
