@@ -7,31 +7,44 @@ let currentPayload = null; // Memory for the last calculation
 
 async function submitToDatabase() {
     const statusEl = document.getElementById('status-msg');
-
+    
     if (!currentPayload) {
         alert("Please calculate your results first.");
         return;
     }
 
-    statusEl.innerText = "Syncing with Google Sheets...";
+    statusEl.innerText = "Syncing with your Google Drive...";
     statusEl.className = "status-msg status-visible";
 
     // --- METHOD A: GOOGLE APPS SCRIPT (ACTIVE) ---
-    const GOOGLE_URL = 'YOUR_GOOGLE_SCRIPT_URL_HERE';
-
+    // PASTE YOUR DEPLOYED GOOGLE APPS SCRIPT WEB APP URL HERE
+    const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxZ0xzGp_2d_RIO0yy8gaz6IjlEWRkQcKmeI9aYyTD2CMShtS4NjBElhU_HhIODxqX_RA/exec'; // <--- UPDATE THIS LINE
+    
     try {
-        await fetch(GOOGLE_URL, {
+        const response = await fetch(GOOGLE_SCRIPT_URL, {
             method: 'POST',
-            mode: 'no-cors',
-            headers: { 'Content-Type': 'application/json' },
+            // mode: 'no-cors' is typically NOT needed for direct Web App calls with `fetch`
+            // and can sometimes obscure error messages. Let's try without it first.
+            // If you encounter CORS issues, we can try adding it back, but it might limit error details.
+            headers: {
+                'Content-Type': 'application/json',
+            },
             body: JSON.stringify(currentPayload)
         });
-
-        statusEl.innerText = "✓ Success: Data synced to your Google Sheet.";
-        statusEl.style.color = "var(--gold-primary)";
+        
+        // Google Apps Script Web Apps usually return 200 OK even on script errors
+        // So we check the text content for our custom success message
+        const responseText = await response.text();
+        if (responseText.includes("Success")) {
+            statusEl.innerText = "✓ Success: Data synced to your Google Drive!";
+            statusEl.style.color = "var(--gold-primary)";
+        } else {
+            throw new Error(responseText); // Propagate script errors
+        }
+        
     } catch (e) {
         console.error("Submission Error", e);
-        statusEl.innerText = "Error syncing data. Please check your connection.";
+        statusEl.innerText = "Error syncing data: " + e.message + ". Check console for details.";
         statusEl.style.color = "#FF5252";
     }
 

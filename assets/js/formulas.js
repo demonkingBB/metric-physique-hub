@@ -78,7 +78,7 @@ const Formulas = {
      * SHARED HELPER FUNCTION
      * Used by all calculators to update UI and prepare the Post Office (core.js)
      */
-    displayResults: function (results, calcName, inputs) {
+     displayResults: function(results, calcName, inputs) {
         // 1. Update the numbers on the screen
         for (const key in results) {
             const el = document.getElementById('res-' + key);
@@ -89,12 +89,26 @@ const Formulas = {
         const section = document.getElementById('results-section');
         if (section) section.style.display = 'block';
 
-        // 3. Save the package for the Post Office (core.js)
-        // currentPayload is a global variable declared in core.js
+        // 3. Determine the HUB based on the calculatorName for Google Script
+        let hubCategory = "General"; // Default hub if not specified
+        if (["Steve Reeves Formula", "McCallum Formula", "Casey Butt Potential", "Golden Ratio Analysis", "FFMI Analysis", "Symmetry Score", "LBM & Fat Mass", "Calorie Surplus Bulk"].includes(calcName)) {
+            hubCategory = "Bodybuilding";
+        } else if (["BMR-TDEE Analysis", "1-Rep Max Estimate", "Macro Distribution", "Protein Needs Analysis"].includes(calcName)) {
+            hubCategory = "Muscle Building";
+        } else if (["Navy Body Fat Analysis", "BMI Analysis", "Waist-to-Height Analysis", "Calorie Deficit Plan", "Loss Timeline Estimate"].includes(calcName)) {
+            hubCategory = "Weight Loss";
+        } else if (["Blood Pressure Analysis", "Heart Rate Zones", "Hydration Analysis", "Sleep Cycle Planning", "VO2 Max Estimate"].includes(calcName)) {
+            hubCategory = "General Health";
+        } else if (["Pace Calculation", "Sweat Rate Analysis", "Intra-workout Carb Plan", "Energy Expenditure"].includes(calcName)) {
+            hubCategory = "Endurance";
+        }
+
+        // 4. Save the package for the Post Office (core.js)
         currentPayload = {
+            hub: hubCategory, // <--- NEW: Added hub category
             calculator: calcName,
             timestamp: new Date().toLocaleString(),
-            measurements: inputs,
+            measurements: inputs || {}, // Ensure inputs is always an object
             ideals: results
         };
     },
