@@ -14,7 +14,7 @@ function submitToDatabase() {
     }
 
     // PASTE YOUR DEPLOYED GOOGLE APPS SCRIPT WEB APP URL HERE
-    const GOOGLE_SCRIPT_URL = 'YOUR_DEPLOYED_GOOGLE_SCRIPT_WEB_APP_URL_HERE';
+    const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxZ0xzGp_2d_RIO0yy8gaz6IjlEWRkQcKmeI9aYyTD2CMShtS4NjBElhU_HhIODxqX_RA/exec';
 
     // 1. Safely encode the payload into a URL query parameter
     const encodedData = encodeURIComponent(JSON.stringify(currentPayload));
