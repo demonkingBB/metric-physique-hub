@@ -1,7 +1,7 @@
 
 
 /**
- * CORE.JS - Global Submission Engine (Popup Export Flow)
+ * CORE.JS - Global Submission Engine (postMessage Bridge)
  */
 
 let currentPayload = null; // Memory for the last calculation
@@ -15,26 +15,31 @@ function submitToDatabase() {
     }
 
     // PASTE YOUR DEPLOYED GOOGLE APPS SCRIPT WEB APP URL HERE
-    const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxZ0xzGp_2d_RIO0yy8gaz6IjlEWRkQcKmeI9aYyTD2CMShtS4NjBElhU_HhIODxqX_RA/exec'; 
+    const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxZ0xzGp_2d_RIO0yy8gaz6IjlEWRkQcKmeI9aYyTD2CMShtS4NjBElhU_HhIODxqX_RA/exec';
 
-    // Securely pack the calculation payload into URL query parameters
-    const encodedData = encodeURIComponent(JSON.stringify(currentPayload));
-    const targetUrl = `${GOOGLE_SCRIPT_URL}?payload=${encodedData}`;
-
-    // Open a popup window for native Google authorization and script execution
-    const popupWidth = 550;
-    const popupHeight = 600;
+    // Open a clean popup window (No query parameters to get stripped by Google Auth)
+    const popupWidth = 500;
+    const popupHeight = 450;
     const left = (window.innerWidth - popupWidth) / 2;
     const top = (window.innerHeight - popupHeight) / 2;
     
-    window.open(
-        targetUrl, 
+    const popup = window.open(
+        GOOGLE_SCRIPT_URL, 
         'MetricPhysiqueExport', 
-        `width=${popupWidth},height=${popupHeight},top=${top},left=${left},resizable=yes,scrollbars=yes`
+        `width=${popupWidth},height=${popupHeight},top=${top},left=${left}`
     );
 
-    // Provide instant feedback to the user on the main site
-    statusEl.innerHTML = "✓ Export window launched! Complete the authorization/save steps in the popup.";
+    // Listen for the popup's request for data, then hand it the payload
+    const messageListener = function(event) {
+        if (event.data && event.data.type === 'REQUEST_PAYLOAD') {
+            popup.postMessage({ type: 'PAYLOAD_DATA', payload: currentPayload }, '*');
+            window.removeEventListener('message', messageListener); // Clean up
+        }
+    };
+    window.addEventListener('message', messageListener);
+
+    // Provide instant feedback on the main site
+    statusEl.innerHTML = "✓ Export window launched! Authorize and save inside the popup.";
     statusEl.className = "status-msg status-visible";
     statusEl.style.color = "var(--gold-primary)";
 }
