@@ -7,46 +7,37 @@ let currentPayload = null; // Memory for the last calculation
 
 async function submitToDatabase() {
     const statusEl = document.getElementById('status-msg');
-    
+    const GOOGLE_URL = 'https://script.google.com/macros/s/AKfycbxZ0xzGp_2d_RIO0yy8gaz6IjlEWRkQcKmeI9aYyTD2CMShtS4NjBElhU_HhIODxqX_RA/exec'; // Ensure this ends in /exec
+
     if (!currentPayload) {
-        alert("Please calculate your results first.");
+        alert("Please calculate results first.");
         return;
     }
 
-    statusEl.innerText = "Syncing with your Google Drive...";
+    statusEl.innerHTML = "Syncing with Google Drive...<br><small>First time? Ensure you have linked your account below.</small>";
     statusEl.className = "status-msg status-visible";
 
-    // --- METHOD A: GOOGLE APPS SCRIPT (ACTIVE) ---
-    // PASTE YOUR DEPLOYED GOOGLE APPS SCRIPT WEB APP URL HERE
-    const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxZ0xzGp_2d_RIO0yy8gaz6IjlEWRkQcKmeI9aYyTD2CMShtS4NjBElhU_HhIODxqX_RA/exec'; // <--- UPDATE THIS LINE
-    
     try {
-        const response = await fetch(GOOGLE_SCRIPT_URL, {
+        // We use 'no-cors' mode. 
+        // NOTE: In 'no-cors', we cannot read the response body, 
+        // but the data WILL reach Google if authorized.
+        await fetch(GOOGLE_URL, {
             method: 'POST',
-            // mode: 'no-cors' is typically NOT needed for direct Web App calls with `fetch`
-            // and can sometimes obscure error messages. Let's try without it first.
-            // If you encounter CORS issues, we can try adding it back, but it might limit error details.
-            headers: {
-                'Content-Type': 'application/json',
-            },
+            mode: 'no-cors', 
+            headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(currentPayload)
         });
-        
-        // Google Apps Script Web Apps usually return 200 OK even on script errors
-        // So we check the text content for our custom success message
-        const responseText = await response.text();
-        if (responseText.includes("Success")) {
-            statusEl.innerText = "✓ Success: Data synced to your Google Drive!";
-            statusEl.style.color = "var(--gold-primary)";
-        } else {
-            throw new Error(responseText); // Propagate script errors
-        }
-        
+
+        // Since we can't see the response in no-cors, we assume success 
+        // but provide a link in case it didn't actually save.
+        statusEl.innerHTML = "✓ Sync Attempted! <br> <a href='" + GOOGLE_URL + "' target='_blank' style='color: var(--gold-primary); text-decoration: underline;'>Click here once to authorize</a> if your sheet was not created.";
+        statusEl.style.color = "var(--gold-primary)";
+
     } catch (e) {
-        console.error("Submission Error", e);
-        statusEl.innerText = "Error syncing data: " + e.message + ". Check console for details.";
-        statusEl.style.color = "#FF5252";
+        console.error("Error", e);
+        statusEl.innerHTML = "Connection Error. <a href='" + GOOGLE_URL + "' target='_blank' style='color: #FF5252;'>Click here to Link Google Drive</a>";
     }
+}
 
     // --- METHOD B: SUPABASE & EMAIL (STEALTH MODE - INACTIVE) ---
     /*
@@ -58,4 +49,3 @@ async function submitToDatabase() {
     // const { data, error } = await _supabaseClient.from('reports').insert([currentPayload]);
     // if(!error) { statusEl.innerText = "Report emailed successfully!"; }
     */
-}
